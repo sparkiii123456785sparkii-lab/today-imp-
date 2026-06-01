@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sparkalbot Internship Program</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #010810;
+        --surface: rgba(255, 255, 255, 0.06);
+        --text: #ffffff;
+        --text-muted: rgba(255, 255, 255, 0.72);
+        --primary: #ffffff;
+        --accent: #d92d2d;
+        --accent-soft: rgba(217, 45, 45, 0.14);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      img,
+      video {
+        display: block;
+        max-width: 100%;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .hero-shell video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.55) saturate(1.1);
+      }
+
+      .hero-shell::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(1, 8, 16, 0.08), rgba(1, 8, 16, 0.72));
+        backdrop-filter: blur(6px);
+      }
+
+      .page {
+        width: min(1200px, 100%);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      header {
+        position: absolute;
+        inset: 0 0 auto;
+        z-index: 20;
+        padding: 24px 0 0;
+        background: rgba(1, 8, 20, 0.80);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+      }
+
+      .brand img {
+        height: 44px;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+
+      .nav-links a,
+      .nav-links button {
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        min-height: calc(100vh - 180px);
+        display: grid;
+        align-items: center;
+        padding: 120px 0 80px;
+      }
+
+      .hero-copy {
+        max-width: 720px;
+      }
+
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 18px;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 201, 71, 0.4);
+        background: rgba(255, 201, 71, 0.10);
+        color: #ffdd85;
+        font-size: 0.85rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .hero-title {
+        margin: 28px 0 0;
+        font-size: clamp(3rem, 5vw, 5rem);
+        line-height: 0.94;
+      }
+
+      .hero-text {
+        margin-top: 20px;
+        color: rgba(255, 255, 255, 0.82);
+        font-size: 1.05rem;
+        max-width: 640px;
+        line-height: 1.8;
+      }
+
+      .hero-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 32px;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 180px;
+        padding: 16px 26px;
+        border-radius: 999px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+
+      .button-primary {
+        background: #ffffff;
+        color: #08101f;
+      }
+
+      .button-secondary {
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        color: white;
+      }
+
+      .button:hover {
+        transform: translateY(-2px);
+      }
+
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
+        margin-top: 42px;
+      }
+
+      .stat-card {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 24px;
+        padding: 24px;
+      }
+
+      .stat-card strong {
+        display: block;
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+
+      .stat-card span {
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .page-section {
+        background: #031222;
+        border-top: 1px solid rgba(255, 255, 255, 0.10);
+      }
+
+      .section-inner {
+        width: min(1200px, 100%);
+        margin: 0 auto;
+        padding: 80px 24px;
+      }
+
+      .section-heading {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        align-items: flex-start;
+        justify-content: space-between;
+      }
+
+      .section-heading h2 {
+        margin: 0;
+        font-size: clamp(2rem, 2.4vw, 3rem);
+      }
+
+      .section-heading p {
+        margin: 10px 0 0;
+        max-width: 720px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+        margin-top: 42px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 201, 71, 0.16);
+        border-radius: 28px;
+        padding: 28px;
+      }
+
+      .card h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+      }
+
+      .card p {
+        color: rgba(255, 255, 255, 0.78);
+        margin: 0;
+      }
+
+      .banner {
+        border-radius: 32px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(3, 32, 61, 0.22));
+        border: 1px solid rgba(255, 201, 71, 0.18);
+        padding: 36px;
+        margin: 0 24px;
+        display: grid;
+        grid-template-columns: 1.4fr 0.8fr;
+        gap: 24px;
+        align-items: center;
+      }
+
+      .banner-actions {
+        display: flex;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+
+      footer {
+        padding: 36px 24px 28px;
+      }
+
+      .footer-inner {
+        width: min(1200px, 100%);
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1.5fr 1fr 1fr;
+        gap: 24px;
+      }
+
+      .footer-inner h4 {
+        margin: 0 0 14px;
+        color: white;
+      }
+
+      .footer-inner a {
+        display: block;
+        margin: 10px 0;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 980px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero-stats,
+        .card-grid,
+        .footer-inner,
+        .banner {
+          grid-template-columns: 1fr;
+        }
+
+        .banner {
+          margin: 0;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .page {
+          padding: 0 16px;
+        }
+
+        header {
+          padding-top: 18px;
+        }
+
+        .hero-title {
+          font-size: 2.7rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="page nav-wrap">
+        <a class="brand" href="#top">
+          <img src="public/logo.jpg" alt="Sparkalbot logo" />
+        </a>
+        <nav class="nav-links">
+          <a href="#top">Home</a>
+          <a href="#about">About</a>
+          <a href="#programs">Programs</a>
+          <a href="#benefits">Benefits</a>
+          <a href="#apply">Apply</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <div class="actions">
+          <a class="button button-secondary" href="#programs">Explore</a>
+          <a class="button button-primary" href="#apply">Apply Now</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page" id="top">
+      <section class="hero">
+        <div class="hero-shell">
+          <video src="Background video.mp4" autoplay muted loop playsinline></video>
+        </div>
+        <div class="hero-content">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">Internship Program</span>
+            <h1 class="hero-title">Build your future with the Sparkalbot Internship Experience</h1>
+            <p class="hero-text">Join a high-impact internship designed for students and fresh graduates who want hands-on exposure to real product delivery, mentorship from industry experts, and a path into professional careers.</p>
+            <div class="hero-buttons">
+              <a class="button button-primary" href="#apply">Start Application</a>
+              <a class="button button-secondary" href="#programs">View Programs</a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-card">
+                <strong>120+</strong>
+                <span>Internships in 2026</span>
+              </div>
+              <div class="stat-card">
+                <strong>1500+</strong>
+                <span>Applicants selected</span>
+              </div>
+              <div class="stat-card">
+                <strong>24</strong>
+                <span>Live project teams</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="page-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <p class="hero-eyebrow" style="background: rgba(227,47,47,.1); color: #c72f2f;">Why Sparkalbot?</p>
+              <h2>A career-building internship modeled on leading corporate programs</h2>
+            </div>
+            <p>Our internship brings a structured training path, expert mentorship, product-focused assignments, and a polished onboarding experience—just like top enterprise internships, but built for you.</p>
+          </div>
+
+          <div class="card-grid">
+            <article class="card">
+              <h3>Real client-style projects</h3>
+              <p>Work on customer-centered use cases, business challenges, and delivery milestones that shape a strong professional portfolio.</p>
+            </article>
+            <article class="card">
+              <h3>Structured mentorship</h3>
+              <p>Learn from senior engineers, designers, and managers through weekly check-ins, code reviews, and career coaching.</p>
+            </article>
+            <article class="card">
+              <h3>Performance recognition</h3>
+              <p>Receive feedback, completion certificates, and a performance summary that helps you transition to your next opportunity.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section" id="programs">
+        <div class="section-inner">
+          <div class="section-heading">
+            <h2>Program highlights</h2>
+            <p>Choose the internship track that best matches your skills, whether you are passionate about software, product design, analytics, or business operations.</p>
+          </div>
+
+          <div class="card-grid">
+            <article class="card">
+              <h3>Software Development</h3>
+              <p>Build full-stack applications, APIs, and automation workflows with modern web technologies and DevOps practices.</p>
+            </article>
+            <article class="card">
+              <h3>Data &amp; Analytics</h3>
+              <p>Analyze datasets, build dashboards, and support insight-driven product decisions with data engineering and visualization.</p>
+            </article>
+            <article class="card">
+              <h3>Design &amp; Experience</h3>
+              <p>Create intuitive interfaces, user journeys, and prototypes that deliver a polished digital experience.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="section-inner banner">
+          <div>
+            <h2>Why this internship is a strong fit for your career</h2>
+            <p>We help talent grow by combining project delivery, mentorship, assessment, and a supportive learning environment. This is especially effective for students preparing for placement interviews and campus hiring.</p>
+            <div class="info-list">
+              <div class="info-item">
+                <div class="info-dot">1</div>
+                <div>
+                  <strong>Live project assignments</strong>
+                  <p>Experience a real internship rhythm with daily collaboration and weekly goals.</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-dot">2</div>
+                <div>
+                  <strong>Personalized feedback</strong>
+                  <p>Get insights on technical skills, communication, and career readiness.</p>
+                </div>
+              </div>
+              <div class="info-item">
+                <div class="info-dot">3</div>
+                <div>
+                  <strong>Certification &amp; report</strong>
+                  <p>Finish with a documented achievement report and certificate to share with recruiters.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <img src="data:image/svg+xml,%3Csvg width='640' height='520' viewBox='0 0 640 520' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='640' height='520' rx='36' fill='%23002d72'/%3E%3Cellipse cx='360' cy='220' rx='180' ry='180' fill='white' opacity='0.12'/%3E%3Cpath d='M156 280C186 240 246 210 312 206C378 202 430 232 454 268C488 320 476 404 380 404C274 404 228 360 204 320C176 272 184 304 156 280Z' fill='white' opacity='0.18'/%3E%3Crect x='124' y='92' width='96' height='96' rx='24' fill='%23E32F2F'/%3E%3Crect x='182' y='130' width='112' height='64' rx='22' fill='white'/%3E%3Crect x='296' y='64' width='160' height='112' rx='32' fill='%23F5F7FF'/%3E%3Crect x='348' y='98' width='88' height='36' rx='18' fill='%23002D72'/%3E%3Crect x='296' y='198' width='208' height='72' rx='28' fill='%23002D72' opacity='0.18'/%3E%3Crect x='420' y='298' width='120' height='96' rx='32' fill='%23E32F2F'/%3E%3Cpath d='M146 372C166 362 204 348 242 340C280 332 320 330 354 334C388 338 418 350 448 370' stroke='white' stroke-width='18' stroke-linecap='round'/%3E%3C/svg%3E" alt="Internship overview illustration" />
+          </div>
+        </div>
+      </section>
+
+      <section id="benefits" class="page-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <h2>Benefits for selected interns</h2>
+            </div>
+            <p>Enjoy a premium internship experience with learning support, mentor access, recognition, and a chance to move into longer-term roles.</p>
+          </div>
+
+          <div class="card-grid">
+            <article class="card">
+              <h3>Stipend support</h3>
+              <p>Receive stipend payments while you gain experience, plus travel or online internship options.</p>
+            </article>
+            <article class="card">
+              <h3>Weekly mentorship</h3>
+              <p>Work directly with mentors who review your progress, guide your work, and share career advice.</p>
+            </article>
+            <article class="card">
+              <h3>Certification</h3>
+              <p>Get an internship completion certificate and a performance report to showcase in applications.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="apply" class="page-section">
+        <div class="section-inner apply-banner">
+          <div>
+            <h2>Ready to join the Sparkalbot Internship Program?</h2>
+            <p>Submit your details now and we will reach out with the next steps for eligibility review and onboarding.</p>
+          </div>
+          <div>
+            <a class="button button-secondary" href="#contact">Contact Us</a>
+            <a class="button button-primary" href="#contact">Apply Today</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="page-section">
+        <div class="section-inner">
+          <div class="section-heading">
+            <div>
+              <h2>Contact & next steps</h2>
+            </div>
+            <p>Have questions about eligibility, program dates, or the application process? Reach out and our team will guide you.</p>
+          </div>
+
+          <div class="card-grid">
+            <article class="card">
+              <h3>General inquiries</h3>
+              <p>Email: careers@sparkalbot.com</p>
+            </article>
+            <article class="card">
+              <h3>Application support</h3>
+              <p>Message: +91 98765 43210</p>
+            </article>
+            <article class="card">
+              <h3>Training updates</h3>
+              <p>Stay in touch for schedule announcements and interview tips.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="page">
+      <div class="footer-grid">
+        <div>
+          <p class="brand" style="font-size: 1.15rem; margin-bottom: 12px;">Sparkalbot</p>
+          <p style="max-width: 320px; color: var(--text-muted);">A dedicated internship experience that mirrors top enterprise career programs with modern design and professional delivery.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Explore</h4>
+          <a href="#about">About</a>
+          <a href="#programs">Programs</a>
+          <a href="#benefits">Benefits</a>
+        </div>
+        <div class="footer-links">
+          <h4>Support</h4>
+          <a href="#apply">Apply</a>
+          <a href="#contact">Contact</a>
+          <a href="#top">Back to top</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Sparkalbot. All rights reserved.</span>
+        <span>Designed for internship applicants and students.</span>
+      </div>
+    </footer>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Dropdown open/close
+        document.querySelectorAll('.dropdown-toggle').forEach(function (btn) {
+          btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var parent = btn.closest('.dropdown') || btn.closest('.dropdown-submenu');
+            if (!parent) return;
+            // close other open siblings
+            var siblings = parent.parentElement.querySelectorAll(':scope > .dropdown.open');
+            siblings.forEach(function (s) { if (s !== parent) s.classList.remove('open'); });
+            parent.classList.toggle('open');
+            var expanded = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', (!expanded).toString());
+          });
+        });
+
+        // Close dropdowns on outside click
+        document.addEventListener('click', function () {
+          document.querySelectorAll('.dropdown.open').forEach(function (d) { d.classList.remove('open'); });
+        });
+
+        // Prevent clicks inside dropdown from closing immediately
+        document.querySelectorAll('.dropdown-menu').forEach(function (m) {
+          m.addEventListener('click', function (e) { e.stopPropagation(); });
+        });
+
+        // Mobile hamburger
+        var hamburger = document.querySelector('.hamburger');
+        if (hamburger) {
+          hamburger.addEventListener('click', function () {
+            var open = document.body.classList.toggle('mobile-menu-open');
+            hamburger.setAttribute('aria-expanded', open.toString());
+          });
+        }
+
+        // Smooth scrolling for same-page anchors
+        document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+          link.addEventListener('click', function (e) {
+            var href = link.getAttribute('href');
+            if (href && href.length > 1) {
+              var target = document.querySelector(href);
+              if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                // close mobile menu if open
+                document.body.classList.remove('mobile-menu-open');
+              }
+            }
+          });
+        });
+
+        // Active section highlighting
+        var sections = document.querySelectorAll('section[id]');
+        var navLinks = document.querySelectorAll('.nav-links a');
+        if (sections.length && navLinks.length) {
+          var obs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              var id = entry.target.id;
+              var link = document.querySelector('.nav-links a[href="#' + id + '"]');
+              if (entry.isIntersecting) {
+                navLinks.forEach(function (l) { l.classList.remove('active'); });
+                if (link) link.classList.add('active');
+              }
+            });
+          }, { threshold: 0.45 });
+          sections.forEach(function (s) { obs.observe(s); });
+        }
+
+        // Sticky header small tweak: add class when scrolled
+        var headerEl = document.querySelector('header');
+        window.addEventListener('scroll', function () {
+          if (!headerEl) return;
+          if (window.scrollY > 20) headerEl.classList.add('header-scrolled'); else headerEl.classList.remove('header-scrolled');
+        });
+
+        // Testimonials slider simple controls
+        var slider = document.getElementById('testimonials-slider');
+        var next = document.getElementById('next-test');
+        var prev = document.getElementById('prev-test');
+        if (slider && next && prev) {
+          next.addEventListener('click', function () { slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' }); });
+          prev.addEventListener('click', function () { slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' }); });
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — SparkleBots Internship</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Inter, system-ui, sans-serif;
+      background: linear-gradient(180deg, #07101f 0%, #091b34 50%, #041022 100%);
+      color: #eef2ff;
+    }
+    a { color: #f9d46d; text-decoration: none; }
+    .page { width: min(1000px, 100%); margin: 0 auto; padding: 28px 18px 42px; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 30px; }
+    .top-bar a.home { font-weight: 700; font-size: 0.95rem; }
+    .hero { padding: 28px 26px; border-radius: 28px; background: rgba(10, 18, 39, 0.92); border: 1px solid rgba(255,255,255,0.06); box-shadow: 0 32px 80px rgba(0,0,0,0.28); }
+    .hero h1 { margin: 0 0 10px; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.05; }
+    .hero p { margin: 0 0 24px; color: #cbd5e1; line-height: 1.8; max-width: 760px; }
+    .grid { display: grid; gap: 20px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 28px; }
+    .card { border-radius: 24px; background: rgba(14, 25, 54, 0.9); border: 1px solid rgba(255,255,255,0.08); padding: 26px; }
+    .card h2 { margin: 0 0 12px; font-size: 1.15rem; color: #fff; }
+    .card p { margin: 0; line-height: 1.7; color: #dbeafe; }
+    .button { display: inline-flex; align-items: center; justify-content: center; margin-top: 18px; padding: 14px 22px; border-radius: 999px; background: linear-gradient(135deg, #f5d16b, #cfab35); color: #081220; font-weight: 700; }
+    .location { margin-top: 32px; padding: 26px; border-radius: 24px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); }
+    .location strong { display: block; margin-bottom: 14px; color: #f8fafc; }
+    .location p { margin: 0; color: #dbeafe; line-height: 1.75; }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 580px) {
+      .page { padding: 18px 14px 32px; }
+      .top-bar { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparklebots-logo" style="margin-bottom:24px; display:flex; align-items:center;"><a href="index.html"><img src="public/logo.jpg" alt="SparkleBots logo" style="height:52px; display:block;" /></a></div>
+  <div class="page">
+    <div class="top-bar">
+      <a class="home" href="index.html">← Back to Home</a>
+      <a class="button" href="registration.html">Apply Now</a>
+    </div>
+    <section class="hero">
+      <h1>Get In Touch With Us</h1>
+      <p>Have questions? Want to schedule a FREE demo? We're here to help you join the right SparkleBots internship track.</p>
+      <div class="grid">
+        <div class="card">
+          <h2>Call Us</h2>
+          <p>+91 8446767555<br>+91 8446767999<br>+91 8446630300</p>
+        </div>
+        <div class="card">
+          <h2>Email Us</h2>
+          <p><a href="mailto:careers@sparklebots.com">careers@sparklebots.com</a></p>
+          <p>Response within 24 hours.</p>
+        </div>
+        <div class="card">
+          <h2>Visit Us</h2>
+          <p>Sparklebots Robotics Innovation and Research Labs<br>Narmada Heights, DP Rd, Gananjay Society, Guruganesh Nagar, Kothrud, Pune, Maharashtra 411038</p>
+          <a class="button" href="https://www.google.com/maps/search/?api=1&query=Sparklebots+Robotics+Innovation+and+Research+Labs%2C+Narmada+Heights%2C+DP+Rd%2C+Gananjay+Society%2C+Guruganesh+Nagar%2C+Kothrud%2C+Pune%2C+Maharashtra+411038" target="_blank" rel="noopener">Open in Google Maps</a>
+        </div>
+      </div>
+      <div class="location">
+        <strong>Office Address</strong>
+        <p>Sparklebots Robotics Innovation and Research Labs, Narmada Heights, DP Rd, Gananjay Society, Guruganesh Nagar, Kothrud, Pune, Maharashtra 411038</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
